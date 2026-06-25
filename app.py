@@ -8,6 +8,7 @@ st.write("Enter a news headline and see if AI can predict stock movement!")
 
 headline = st.text_input("📝 Enter a news headline:")
 ticker = st.text_input("📈 Enter NSE stock ticker (e.g. INFY.NS, RELIANCE.NS):")
+ticker = ticker.upper().strip()
 date = st.date_input(
     "📅 Date of the news (past dates only):",
     max_value=dt.today() - timedelta(days=1)
@@ -27,7 +28,7 @@ if st.button("Analyze"):
         else:
             st.warning(f"Neutral 😐 ({score}% confident)")
 
-        st.subheader("📊 Stock Movement Next Day")
+        st.subheader("📊 Stock Movement Today")
         if before:
             st.write(f"Before: ₹{before} → After: ₹{after}")
             st.metric("Price Change", f"{change}%")
@@ -39,6 +40,6 @@ if st.button("Analyze"):
             else:
                 st.error("AI prediction did NOT match reality ❌")
         else:
-            st.warning("Could not fetch stock data for that date.")
+            st.warning("Could not fetch stock data. Try a different date or ticker.")
     else:
         st.warning("Please fill in all fields!")
