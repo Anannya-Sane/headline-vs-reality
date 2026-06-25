@@ -1,0 +1,4 @@
+transformers
+yfinance
+streamlit
+torch
