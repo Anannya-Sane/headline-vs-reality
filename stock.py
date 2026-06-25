@@ -1,10 +1,19 @@
 import yfinance as yf
 from datetime import datetime, timedelta
 
+def get_next_working_day(date):
+    while date.weekday() >= 5:
+        date += timedelta(days=1)
+    return date
+
 def get_price_change(ticker, date):
+    ticker = ticker.upper().strip()
     stock = yf.Ticker(ticker)
+    
     start = datetime.strptime(date, "%Y-%m-%d")
-    end = start + timedelta(days=3)
+    start = get_next_working_day(start)
+    end = start + timedelta(days=7)
+
     data = stock.history(start=start, end=end)
 
     if len(data) >= 2:
