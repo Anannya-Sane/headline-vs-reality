@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import date as dt, timedelta
 from sentiment import get_sentiment
 from stock import get_price_change
 
@@ -7,16 +8,15 @@ st.write("Enter a news headline and see if AI can predict stock movement!")
 
 headline = st.text_input("📝 Enter a news headline:")
 ticker = st.text_input("📈 Enter NSE stock ticker (e.g. INFY.NS, RELIANCE.NS):")
-date = st.date_input("📅 Date of the news:")
+date = st.date_input(
+    "📅 Date of the news (past dates only):",
+    max_value=dt.today() - timedelta(days=1)
+)
 
 if st.button("Analyze"):
     if headline and ticker:
         with st.spinner("Analyzing..."):
-
-            # Sentiment
             label, score = get_sentiment(headline)
-
-            # Stock movement
             before, after, change = get_price_change(ticker, str(date))
 
         st.subheader("🧠 AI Sentiment")
