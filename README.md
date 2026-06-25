@@ -25,5 +25,5 @@ streamlit run app.py
 - Stock Movement: +7.93%
 - Learning: Markets sometimes price in bad news beforehand!
 
-## 👩‍💻 Built by Shraddha
+## 👩‍💻 Built by Anannya Sane
 First AI project — built while learning AI in Finance!
